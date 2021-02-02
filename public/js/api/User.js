@@ -4,12 +4,17 @@
  * Имеет свойство URL, равное '/user'.
  * */
 class User {
+  URL = '/user';
   /**
    * Устанавливает текущего пользователя в
    * локальном хранилище.
    * */
   static setCurrent(user) {
-
+    console.log(user);
+for(let key in user.data) {
+  localStorage.setItem(`${key}`, `${user.data[key]}`);
+}
+console.log(localStorage);
   }
 
   /**
@@ -24,8 +29,8 @@ class User {
    * Возвращает текущего авторизованного пользователя
    * из локального хранилища
    * */
-  static current() {
-
+  static current(localStorage) {
+    
   }
 
   /**
@@ -53,7 +58,7 @@ class User {
    * User.setCurrent.
    * */
   static register( data, callback = f => f ) {
-
+this.setCurrent(data);
   }
 
   /**

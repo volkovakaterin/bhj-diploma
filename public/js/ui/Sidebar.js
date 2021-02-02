@@ -38,18 +38,19 @@ class Sidebar {
     const itemLogin = document.querySelector('.menu-item_login');
     const itemLogout = document.querySelector('.menu-item_logout');
     
-    itemRegister.onclick = function(event) {
-      //console.log(event.currentTarget);
-      //console.log(App.getModal('register'));
-      App.getModal('register').open();
-      };
-
     itemLogin.onclick = function() {
       App.getModal('login').open();
       const form = document.getElementById( 'login-form' ),
       asyncForm = new AsyncForm( form );
-       asyncForm.getData();
     }
+    
+    itemRegister.onclick = function(event) {
+      App.getModal('register').open();
+      const form = document.getElementById( 'register-form' ),
+      asyncForm = new AsyncForm( form );
+      };
+
+    
 
     itemLogout.onclick = function(event) {
         User.logout();

@@ -17,6 +17,8 @@ class AsyncForm {
   constructor( element ) {
 this.element = element;
 this.registerEvents();
+this.dataLogin = new function(){};
+
   }
 
   /**
@@ -24,14 +26,16 @@ this.registerEvents();
    * вызывает метод submit()
    * */
   registerEvents() {
-    const btnPrimary = document.querySelector('.btn-primary');
-    btnPrimary.addEventListener( "click" , (event) => {
+    const btnPrimary = document.querySelectorAll('.btn-primary');
+    btnPrimary.forEach( elem => {
+      elem.addEventListener( "click" , (event) => {
 event.preventDefault();
+console.log(event.currentTarget); 
 console.log("Привет");
-const btnClose = document.querySelectorAll('button[data-dismiss="modal"]');
-console.log(btnClose);
 this.submit();
     }) 
+    })
+    
   }
 
   /**
@@ -44,14 +48,12 @@ this.submit();
   getData() {
     const formData = new FormData( this.element ),
     entries = formData.entries();
-    let dataLogin = {};
 
 for (let item of entries) {
   const key = item[0],
     value = item[1];
-  //console.log( `${key}: ${value}` );
-  dataLogin[`${key}`] = `${value}`;
-  //console.log(dataLogin);
+  this.dataLogin[`${key}`] = `${value}`;
+  //console.log(this.dataLogin);
 }
   }
 
@@ -64,9 +66,15 @@ for (let item of entries) {
    * данные, полученные из метода getData()
    * */
   submit() {
-    let data = {};
-    data["data"] = `${this.getData}`;
-    console.log(data);
-    
+this.getData();
+//console.log(this.dataLogin);
+let dataLogin2 = Object.create(this.dataLogin);
+//console.log(dataLogin2); 
+    let data = new function() {
+      this.data = dataLogin2;
+    }
+    console.log(data.data);
+    //console.log(data.data.email);
+    this.onSubmit(data);
   }
 }

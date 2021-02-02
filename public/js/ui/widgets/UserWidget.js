@@ -11,6 +11,8 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
+    this.element = element;
+   // if(this.element.trim() === "") { alert(new Error("Ошибка"));}
 
   }
 
@@ -22,6 +24,9 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update() {
-
+    User.current();
+console.log(localStorage.getItem('name')); 
+    const userName = document.querySelector('.user-name');
+    userName.innerHTML = `${localStorage.getItem('name')}`;
   }
 }

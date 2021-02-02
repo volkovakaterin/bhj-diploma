@@ -13,6 +13,7 @@ class Modal {
    * */
   constructor( element ) {
 this.element = element;
+this.registerEvents();
   }
 
   /**
@@ -25,7 +26,6 @@ this.element = element;
     btnClose.forEach(elem => {
 elem.addEventListener( "click", () => {
   this.onClose();
-  console.log("Close");
 })
     })
     
